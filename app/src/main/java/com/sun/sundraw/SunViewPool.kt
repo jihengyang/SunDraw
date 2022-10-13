@@ -55,5 +55,6 @@ object SunViewPool {
         sunHandlerThread = null
         sunHandler?.removeCallbacksAndMessages(null)
         sunHandler = null
+        sunTextView = null
     }
 }

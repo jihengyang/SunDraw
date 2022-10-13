@@ -6,12 +6,15 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
     private val mainHandler = Handler(Looper.getMainLooper())
 
     private val rootView by lazy { findViewById<ViewGroup>(R.id.root) }
+
+    private val sunTextStatic by lazy { findViewById<TextView>(R.id.text_static) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +26,12 @@ class MainActivity : AppCompatActivity() {
 
         SunViewPool.preLoad(this)
 
+//        mainHandler.postDelayed(Runnable {
+//            rootView.addView(SunViewPool.sunTextView!!)
+//        }, 2000)
+
         mainHandler.postDelayed(Runnable {
-            rootView.addView(SunViewPool.sunTextView!!)
+            sunTextStatic.text = "修改文字"
         }, 2000)
     }
 
