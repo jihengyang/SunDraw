@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -35,8 +36,12 @@ class MainActivity : AppCompatActivity() {
 
         showList()
         findViewById<View>(R.id.perform_travel).setOnClickListener {
-            it.requestLayout()
+            it.invalidate()
         }
+//        mainHandler.postDelayed({
+//            SunBusy.simulateBusy()
+//        }, 2000)
+//        SunFps.calculateFps()
     }
 
     private fun showList() {
@@ -44,12 +49,12 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             adapter = object : RecyclerView.Adapter<SunViewHolder>() {
                 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SunViewHolder {
-                    return SunViewHolder(TextView(context).apply {
+                    return SunViewHolder(SunTextView(context).apply {
                         text = "1"
                         minHeight = 100
                         textSize = 20f
                         setOnClickListener {
-                            it.requestLayout()
+                            it.invalidate()
                         }
                         layoutParams = RecyclerView.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -68,6 +73,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     class SunViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        return super.dispatchTouchEvent(ev)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
