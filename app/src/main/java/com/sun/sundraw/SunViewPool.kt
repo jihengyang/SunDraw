@@ -3,6 +3,7 @@ package com.sun.sundraw
 import android.content.Context
 import android.os.Handler
 import android.os.HandlerThread
+import android.text.SpannableStringBuilder
 
 /**
  * Created by hengyangji on 2022/10/12
@@ -36,8 +37,8 @@ object SunViewPool {
 
         if (sunTextView == null) {
             sunHandler!!.post {
-                sunTextView = SunTextView(context)
-                sunTextView!!.text = "预加载内容"
+                sunTextView = SunTextView(context.applicationContext)
+                sunTextView!!.text = SpannableStringBuilder("预加载内容")
             }
         }
         if (sunComplexUIView == null) {
